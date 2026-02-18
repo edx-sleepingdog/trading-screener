@@ -787,29 +787,6 @@
                 `;
                 document.getElementById('signalResults').innerHTML += diagHtml;
             }
-            const entry = parseFloat(document.getElementById('calcEntry').value);
-            const stop = parseFloat(document.getElementById('calcStop').value);
-            const account = parseFloat(document.getElementById('calcAccount').value);
-            const riskPct = parseFloat(document.getElementById('calcRisk').value);
-
-            if (!entry || !stop || !account || !riskPct) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            const riskAmount = account * (riskPct / 100);
-            const riskPerShare = Math.abs(entry - stop);
-            const shares = Math.floor(riskAmount / riskPerShare);
-            const positionValue = shares * entry;
-            const target = entry + (2 * riskPerShare);
-            const breakeven = entry + (riskPerShare / 2);
-
-            document.getElementById('riskAmount').textContent = '$' + riskAmount.toFixed(2);
-            document.getElementById('riskPerShare').textContent = '$' + riskPerShare.toFixed(2);
-            document.getElementById('positionSize').textContent = shares + ' shares';
-            document.getElementById('positionValue').textContent = '$' + positionValue.toFixed(2);
-            document.getElementById('target2R').textContent = '$' + target.toFixed(2);
-            document.getElementById('breakeven').textContent = '$' + breakeven.toFixed(2);
         }
 
         function showAddTrade() {
