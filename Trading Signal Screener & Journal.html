@@ -410,19 +410,6 @@
             }
         }
 
-                return {
-                    symbol: symbol,
-                    closes: data.c,
-                    highs: data.h,
-                    lows: data.l,
-                    volumes: data.v,
-                    timestamps: data.t
-                };
-            } catch (error) {
-                console.error(`Error fetching ${symbol}:`, error);
-                return null;
-            }
-        }
 
         async function scanMarket() {
             const symbolInput = document.getElementById('symbolInput').value.trim();
