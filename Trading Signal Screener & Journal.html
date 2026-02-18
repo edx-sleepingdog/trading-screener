@@ -682,7 +682,9 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 `;
                 pipeline.forEach(s => {
-                    const dots = Object.values(s.checks).map(v => v ? '🟢' : '⚪').join(' ');
+                    const checkKeys = Object.keys(s.checks);
+                    const checkVals = Object.values(s.checks);
+                    const dotRows = checkKeys.map((k, i) => `<div class="flex items-center gap-1 text-xs"><span>${checkVals[i] ? '🟢' : '⚪'}</span><span class="${checkVals[i] ? 'text-gray-700' : 'text-gray-400'}">${k}</span></div>`).join('');
                     const missing = Object.entries(s.checks).filter(([k,v]) => !v).map(([k]) => checkLabels[k] || k).join(', ');
                     pipeHtml += `
                         <div class="bg-white border border-gray-200 rounded p-3 shadow-sm">
@@ -690,7 +692,7 @@
                                 <span class="font-bold text-gray-800">${s.symbol}</span>
                                 <span class="text-sm text-gray-500">$${s.price.toFixed(2)}</span>
                             </div>
-                            <div class="text-sm mb-1">${dots}</div>
+                            <div class="mb-1">${dotRows}</div>
                             <div class="text-xs text-red-500 font-medium">Missing: ${missing}</div>
                             <div class="text-xs text-gray-400 mt-1">RS: ${s.relativeStrength > 0 ? '+' : ''}${s.relativeStrength}% vs SPY &nbsp;|&nbsp; Vol: ${s.volumeRatio}x avg</div>
                         </div>
@@ -714,7 +716,9 @@
                 const checkLabels = { pullback: 'Near 20 SMA', uptrend: 'Uptrend', notExtended: 'Not Extended', relativeStrength: 'RS > SPY', volumeConfirmation: 'Volume OK',
                                       breakdown: 'Below 200 SMA', downtrend: 'Downtrend', failedRally: 'Failed Rally', relativeWeakness: 'RS < SPY' };
                 pipeline.sort((a, b) => a.symbol.localeCompare(b.symbol)).forEach(s => {
-                    const dots = Object.values(s.checks).map(v => v ? '🟢' : '⚪').join(' ');
+                    const checkKeys = Object.keys(s.checks);
+                    const checkVals = Object.values(s.checks);
+                    const dotRows = checkKeys.map((k, i) => `<div class="flex items-center gap-1 text-xs"><span>${checkVals[i] ? '🟢' : '⚪'}</span><span class="${checkVals[i] ? 'text-gray-700' : 'text-gray-400'}">${k}</span></div>`).join('');
                     const missing = Object.entries(s.checks).filter(([k,v]) => !v).map(([k]) => checkLabels[k] || k).join(', ');
                     pipeHtml += `
                         <div class="bg-white border border-gray-200 rounded p-3 shadow-sm">
@@ -722,7 +726,7 @@
                                 <span class="font-bold text-gray-800">${s.symbol}</span>
                                 <span class="text-sm text-gray-500">$${s.price.toFixed(2)}</span>
                             </div>
-                            <div class="text-sm mb-1">${dots}</div>
+                            <div class="mb-1">${dotRows}</div>
                             <div class="text-xs text-red-500 font-medium">Missing: ${missing}</div>
                             <div class="text-xs text-gray-400 mt-1">RS: ${s.relativeStrength > 0 ? '+' : ''}${s.relativeStrength}% vs SPY &nbsp;|&nbsp; Vol: ${s.volumeRatio}x avg</div>
                         </div>
