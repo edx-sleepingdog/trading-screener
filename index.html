@@ -827,10 +827,10 @@ function renderHuntResults(longs, shorts, totalScanned) {
             </div>
             <!-- RS strip -->
             <div class="flex items-center gap-3 mb-2 py-1.5 px-2 rounded" style="background:#0d1520">
-                <span class="text-xs text-gray-400">RS 4wk:</span>
-                <span class="text-xs font-bold ${c.rs4 !== null && c.rs4 > 0 ? 'text-green-400' : 'text-red-400'}">${rs4Str}</span>
-                <span class="text-xs text-gray-400 ml-1">13wk:</span>
+                <span class="text-xs text-gray-400">RS 13wk:</span>
                 <span class="text-xs ${c.rs13 !== null && c.rs13 > 0 ? 'text-green-300' : 'text-red-300'}">${rs13Str}</span>
+                <span class="text-xs text-gray-400 ml-1">4wk:</span>
+                <span class="text-xs font-bold ${c.rs4 !== null && c.rs4 > 0 ? 'text-green-400' : 'text-red-400'}">${rs4Str}</span>
                 <span class="text-sm font-bold ml-auto" style="color:${arrowColor}">${arrow}</span>
                 <span class="text-xs text-gray-500">${c.rsMomentum}</span>
             </div>
@@ -1489,7 +1489,7 @@ async function loadSectorRS() {
             let arrow='—',arrowColor='#6b7280';
             if(row.rs4!==null&&row.rs13!==null){const d=row.rs4-row.rs13;if(d>0.5){arrow='↑';arrowColor='#10b981';}else if(d<-0.5){arrow='↓';arrowColor='#f87171';}else{arrow='→';arrowColor='#9ca3af';}}
             const tr=document.createElement('tr');tr.style.borderBottom='1px solid #2d3748';
-            tr.innerHTML=`<td class="py-1.5 pr-2 text-gray-400 text-xs">${i+1}</td><td class="py-1.5 pr-2 text-gray-200 text-xs font-medium">${row.name}</td><td class="py-1.5 pr-4 text-gray-400 text-xs font-mono">${row.ticker}</td><td class="py-1.5 pr-4 text-right font-mono text-xs font-bold" style="color:${rsColor(row.rs4)}">${rs4Str}</td><td class="py-1.5 pr-4 text-right font-mono text-xs" style="color:${rsColor(row.rs13)}">${rs13Str}</td><td class="py-1.5 text-right font-bold text-sm" style="color:${arrowColor}">${arrow}</td>`;
+            tr.innerHTML=`<td class="py-1.5 pr-2 text-gray-400 text-xs">${i+1}</td><td class="py-1.5 pr-2 text-gray-200 text-xs font-medium">${row.name}</td><td class="py-1.5 pr-4 text-gray-400 text-xs font-mono">${row.ticker}</td><td class="py-1.5 pr-4 text-right font-mono text-xs font-bold" style="color:${rsColor(row.rs13)}">${rs13Str}</td><td class="py-1.5 pr-4 text-right font-mono text-xs" style="color:${rsColor(row.rs4)}">${rs4Str}</td><td class="py-1.5 text-right font-bold text-sm" style="color:${arrowColor}">${arrow}</td>`;
             tbody.appendChild(tr);
         });
         loading.classList.add('hidden');table.classList.remove('hidden');
